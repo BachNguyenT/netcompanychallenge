@@ -1,0 +1,163 @@
+{
+  "pipeline_version": 2,
+  "product": "Company A Nordic Retail Digital Solution (working name)",
+  "slug": "netcompany",
+  "created": "2026-10-16",
+  "last_updated": "2026-10-21",
+  "input_type": "problem-led",
+  "context": "competition",
+  "current_step": "08",
+  "tracks": {
+    "business_case": true,
+    "design": true,
+    "mvp": true,
+    "production": false
+  },
+  "defaults": {
+    "frontend_stack": "default confirmed",
+    "backend_stack": "default confirmed",
+    "auth": "default confirmed",
+    "frontend_hosting": "default confirmed",
+    "backend_hosting": "default confirmed",
+    "ci_cd": "default confirmed",
+    "repo_layout": "default confirmed",
+    "primary_research_kit": "skipped",
+    "deck_slides": "withheld until user says so"
+  },
+  "gates": {
+    "0": {
+      "status": "passed",
+      "date": "2026-10-16"
+    },
+    "A": {
+      "status": "awaiting_user"
+    },
+    "closure": {
+      "status": "pending"
+    },
+    "B": {
+      "status": "pending"
+    },
+    "C": {
+      "status": "pending"
+    },
+    "D": {
+      "status": "pending"
+    }
+  },
+  "steps": {
+    "00": {
+      "status": "done",
+      "completed": "2026-10-16"
+    },
+    "01": {
+      "status": "done",
+      "completed": "2026-10-16"
+    },
+    "02": {
+      "status": "done",
+      "completed": "2026-10-16",
+      "searches": 13,
+      "file": "02-discover/02-market-research.md"
+    },
+    "03": {
+      "status": "done",
+      "completed": "2026-10-16",
+      "searches": 9,
+      "file": "02-discover/03-user-research.md"
+    },
+    "04": {
+      "status": "done",
+      "completed": "2026-10-16",
+      "searches": 2,
+      "file": "02-discover/04-persona-research.md"
+    },
+    "05": {
+      "status": "done",
+      "completed": "2026-10-16",
+      "searches": 0,
+      "file": "02-discover/05-customer-journey.md"
+    },
+    "06": {
+      "status": "done",
+      "completed": "2026-10-21",
+      "searches": 4,
+      "file": "03-define/06-problem-statement.md"
+    },
+    "07": {
+      "status": "done",
+      "completed": "2026-10-21",
+      "searches": 5,
+      "depth": "full",
+      "file": "03-define/07-solution-proposal.md",
+      "reason": "problem-led input; three distinct concepts compared"
+    },
+    "08": {
+      "status": "done",
+      "completed": "2026-10-21",
+      "searches": 3,
+      "file": "03-define/08-product-strategy-scope.md"
+    },
+    "09": {
+      "status": "pending"
+    },
+    "10": {
+      "status": "pending"
+    },
+    "11": {
+      "status": "pending"
+    },
+    "12": {
+      "status": "pending"
+    },
+    "13": {
+      "status": "pending"
+    },
+    "14": {
+      "status": "pending"
+    },
+    "15": {
+      "status": "pending"
+    },
+    "16": {
+      "status": "pending"
+    },
+    "17": {
+      "status": "pending"
+    },
+    "18": {
+      "status": "pending"
+    },
+    "19": {
+      "status": "pending"
+    },
+    "20": {
+      "status": "pending"
+    },
+    "21": {
+      "status": "pending"
+    },
+    "22": {
+      "status": "pending"
+    },
+    "23": {
+      "status": "pending"
+    },
+    "24": {
+      "status": "pending"
+    },
+    "25": {
+      "status": "pending"
+    }
+  },
+  "design": {},
+  "business": {
+    "deck_status": "none"
+  },
+  "mvp": {
+    "slices": []
+  },
+  "production": {
+    "slices": []
+  }
+}
