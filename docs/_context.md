@@ -100,8 +100,12 @@ Attachments: outputs/netcompany/case.md (the brief itself, S-001)
 |---|---|---|
 | First deployable release (R1) | pilot live ~3 months from start | R-15 |
 | Demo / pitch / submission | no fixed date (D-05) | R-16 |
+| Pilot plan | 12 weeks: baseline weeks 1-2, shadow weeks 3-8, supervised go-live weeks 9-12 | R-27 |
 
 ## Gate Log
 | Gate | Date | Outcome | Decisions resolved |
 |---|---|---|---|
 | 0 | 2026-10-16 | passed | none resolved (D-01..D-06 open by design) |
+| Update | 2026-10-23 | User research S-037 supplied: problem G1 selected, Denmark, scope fixed (R-23..R-31); Define re-run; earlier delivery-concept Define files archived | D-01, D-02, D-04, D-06, D-07, D-08, D-13, D-14 resolved; D-09..D-11 superseded |
+| A | 2026-10-23 | passed on the user's instruction to run the pipeline to the PRD on the decisions in S-037 (problem G1, Denmark, scope and plan) | Pipeline-derived items (R2/R3 composition D-26, roles D-22, etc.) go to the Step 12 closure batch |
+| Closure | 2026-10-23 | passed: 14 user answers; remaining open items 0 | D-03, D-05, D-17..D-34 |

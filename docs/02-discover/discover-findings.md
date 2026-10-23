@@ -53,3 +53,17 @@ Evidence strength refers to the *problem*, not the solution. 3-month pilot fit r
 
 ## 6. Evidence limitations
 All sources are public peer data and vendor material, not Company A. Review sites skew negative and consumer. Several sources were search-result summaries rather than pages read in full (marked in `_sources.md`). No Nordic figure was found for failed-delivery rate, cost per failure or manual work hours; therefore no financial claim is made.
+
+---
+# Update 2026-10-23 — user research incorporated; the user's decision supersedes my earlier recommendation
+
+The user supplied their own gap analysis (S-037, `01-intake/user-research-gap-analysis.md`). It ranks ten gaps and selects **G1, unstructured B2B order intake** (4.0 of 5), narrowly ahead of **G2, delivery promise and exceptions** (3.9), with Denmark as the pilot market. This is the user's decision (R-23 to R-27) and replaces my earlier recommendation (Direction A, delivery promise hub). Where the two analyses meet:
+
+- **Agrees:** fragmented systems are a root cause, not a candidate; overlay beats ERP replacement (Lidl, Travis Perkins); delivery visibility is a credible follow-on (the user keeps a delivery-promise check inside scope).
+- **Differs:** my Discover found strong evidence for delivery pain and **no** evidence for manual processes (D-08). S-037 supplies that evidence (job ads at the merchants it names (Beijer, Bygma, Optimera; S-037 itself counts four), Solar/DI digital shares, public order mailboxes, a vendor launch), but states that the size at Company A is unmeasured. Both analyses agree that no source gives share of unstructured orders, minutes per order or error rates.
+- **Sensitivity:** G1 stays first under three of four weightings; G2 overtakes when Impact is weighted 40% and Ease 15% (S-037 §3). The decision therefore rests on speed and fit with the 10-12 week constraint, which is consistent with the brief.
+- **What would overturn it** (S-037 §4.2): more than 80% of B2B lines already arriving structurally, under 3 minutes per unstructured order, or order-desk work under 0.2 FTE per store.
+
+Open and carried forward: D-12 / D-23 (ERP write access), D-17 (AI wording), D-18 (Netcompany components), D-19 (LLM provider and data), D-24 / D-25 (size and accuracy assumptions), RK-05 to RK-08.
+
+Archived: the Define files for the delivery concept are in `03-define/_superseded-2026-10-21/` (kept for the record; not a source for the PRD).

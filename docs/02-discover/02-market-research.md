@@ -89,3 +89,48 @@ These imply thin margins (3.7-5.9%), so small percentage gains in delivery cost 
 - [x] Positioning axes justified by evidence
 - [x] Regulatory section for DK/NO/SE (delivery-specific regulation: none found)
 - [x] No trend radar / funding / job-post analysis (job ads used only for task descriptions, S-019 in Step 03)
+
+---
+# Update 2026-10-23 — incorporating the user's gap analysis (S-037)
+
+*Searches used in this update: 3 (verification of S-038, S-039, S-046; counted in Step 06's budget). Everything marked "via S-037" is carried from the user's research and not independently verified here.*
+
+## U1. Scope change
+The selected problem is G1, unstructured B2B order intake (R-23). The earlier delivery-promise material above stays valid as the basis for the delivery-promise check (step 5 of the MVP journey) and for the parked G2 follow-up.
+
+## U2. Alternatives for unstructured B2B order intake
+| Alternative | Type | Target segment | Core offer | Weaknesses / limits (evidence) | Sources |
+|---|---|---|---|---|---|
+| EDI | direct (structured) | Large, repeat buyers | Machine-to-machine orders, confirmations, invoices (STARK runs these automatically) | Does not fit small trade customers; Danish firms get 25 of their 33 points of online revenue via EDI (S-039), so the long tail is outside it | S-039, S-042 |
+| B2B portal / web shop / app | direct (structured) | Trade customers | Self-service ordering at contract prices | Low uptake: Byggmakker portal ~1.5% of revenue (2016); Maxbo Proff: about half of professional customers use it but revenue does not match (S-047). Customers value service, convenience and advice over portals (UK: S-040) | S-040, S-047 |
+| AI order entry (Toolbx, DJUST, Hyperfox, Esker, SAP partner tools) | direct (solution category) | Distributors and dealers | Reads email/PDF/Excel/photos, matches to catalogue, drafts orders for review | Toolbx GA 1 Sep 2026, US, vendor claims only; no independent building-materials results found; one named early user (S-046, S-037) | S-046 |
+| Order office / sales staff re-keying into the ERP | workaround | All merchants | Staff read, match SKUs, apply prices, key orders; regional order mailboxes (Optimera), branch order emails (Beijer) | The status quo; cost hidden inside general sales roles (S-037 §4.1) | S-043, S-044 |
+| Do nothing | do-nothing | — | Continue; peers keep digitising (Solar 65% of order lines digital; Ahlsell Norway >50% digital trade) | Share of unstructured orders at Company A unknown | S-038, S-050 |
+
+## U3. Digital-share benchmarks (not Company A data)
+| Benchmark | Figure | Source | Note |
+|---|---|---|---|
+| Solar A/S order lines made digitally | 65% (2024); "still 65% in Q2 2025" via S-037 | S-038 | Implies ~35% by other channels at a technical wholesaler |
+| Danish companies' revenue online | 33% in 2025 (25 pts EDI, 8 pts web) | S-039 | All sectors, B2B and B2C |
+| UK trade sales online | ~8% (2022, estimate) | S-040 | Old; builders' merchants |
+| Ahlsell Norway digital trade | >50% (~45 stores) | S-050 | Technical wholesale |
+
+## U4. Competitive minimum bar for order intake
+Reads the formats customers actually send (email text, PDF, Excel, photo); understands trade shorthand ("45x95 C24 4.8m"); applies the customer's contract price; leaves the person in control; writes to the existing ERP; works in Danish. Differentiators: SKU matching on purchase history, exception queue by confidence, measured edit rate.
+
+## U5. Positioning
+Axes: **X = share of orders handled without manual keying**, **Y = trade fit (shorthand, contract prices, relationship)**. EDI: X high, Y low for small customers; portals: X high where used, Y low (uptake); manual order office: X low, Y high; AI order entry (Toolbx-type): X medium-high claimed, Y claimed high, unproven. **Whitespace:** an assistant that keeps the relationship channel (email/phone) and removes the re-keying — no independent Nordic result found.
+
+## U6. Regulation (additions)
+| Basis | Implication |
+|---|---|
+| GDPR on emails/PDFs that contain personal data of customer contacts and sites | DPIA, processor terms for any LLM provider, data minimisation and retention (D-19) |
+| EU AI Act | Not researched yet; classification and transparency duties to be checked in Step 11 (budget 10) |
+| Denmark: Datatilsynet focus on employee monitoring (S-014) | Consistent with R-26: no individual employee monitoring; metrics aggregate |
+| Works-council rules | The employee-consultation rules researched earlier (NO, SE) become relevant when scaling to NO/SE; Danish consultation rules not researched yet (open item for Step 11/13) |
+
+## U7. Analogous cases (additions)
+Travis Perkins: early-2025 problems attributed to an Oracle cutover (S-045, via S-037) and Lidl's abandoned SAP programme (S-029): both support an overlay rather than ERP replacement (R-26).
+
+## U8. Market size
+Unchanged in method: no TAM/SAM/SOM. The labelled illustrative model in R-31 (EUR ≈14m/year, range EUR 1.9m-33.1m; assumption, not data) replaces peer-margin context as the value sketch. Inputs to validate: orders per store per day, share unstructured, minutes per order, loaded labour cost (Eurostat sector figures not verified here: S-041).

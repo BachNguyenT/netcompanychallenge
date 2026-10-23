@@ -1,151 +1,166 @@
-Step 08 · Searches used: 3/3 · Sources: S-002, S-003, S-012..S-014, S-025, S-033..S-036
+Step 08 · Searches used: 2/3 (touchless-rate and APQC cost benchmarks) · Sources: S-037, S-038, S-039, S-046, S-048, S-052, S-053, S-055, S-057
 
 # Step 08 — Product Strategy & Scoping (complete product)
 
-> Scope below is the **complete** Promise & Delivery Hub (Step 07), phased into releases. R1 is shaped by the ~3-month pilot target (R-15) and a single pilot market (R-11); that shrinks R1, not the specification. Open items are marked `[D-##]`.
+> The complete Order Intake Assistant (Step 07), phased into releases. R1 is shaped by the user's 12-week Denmark plan (R-24, R-25, R-27); that shrinks R1, not the specification. R2 and R3 come from S-037's "Later phases" column (D-26 to confirm). Open items are marked `[D-##]`. The earlier delivery-concept Step 08 is archived.
 
 ## 1. Vision, mission, hypothesis
-**Vision.** Every promise Company A makes to a customer — in stock, on this date, in this window — is one it can keep, in every country.
-**Mission.** Give customers, branches, dispatch and support one reliable view and one commitment for every order, configured for each market's way of working.
-**Hypothesis.** We believe customers who order building materials for delivery (pros and DIYers `[D-02]`) experience broken promises and unresolved problems (O-01, O-04, O-02) because the promise is made from partial, drifting stock and delivery data across local systems. If we build a Promise & Delivery Hub that makes the promise from reconciled data and handles exceptions proactively, customers will receive what was promised without chasing, measured by the Kept-promise rate.
+**Vision.** Every trade order Company A receives, in whatever form the customer sends it, becomes a correct, priced order in the ERP within minutes, with a person in control.
+**Mission.** Give order handlers an assistant that reads, matches, prices and prepares each order so they approve instead of key, and give management a measured view of how orders arrive.
+**Hypothesis.** We believe order handlers (PER-4) at Danish merchant branches and order offices spend a large share of their time re-keying unstructured orders from trade customers (P-09, P-10) because interpreting free-form trade orders has been human work and its cost is invisible. If we build an assistant that prepares draft orders for one-click approval and keeps the customer's channel, handlers will approve most drafts without edits and customers will get faster, more accurate confirmations, measured by the share of orders approved without edits, with line error rate and time to confirmation as guardrails.
 
 ## 2. North Star (defined here once)
-**Kept-promise rate (KPR).**
-- **Definition:** delivered orders where, per order, (a) delivery occurred within the confirmed window or date, (b) all ordered lines arrived, (c) goods were undamaged, and (d) the customer raised no exception — divided by all delivered orders, excluding changes the customer requested after confirmation. Measured per market and branch, weekly.
-- **Why it reflects delivered value:** it is the customer-visible success of the promise, spanning O-01, O-02 and O-03.
-- **Benchmark:** OTIF (a subset of KPR) is typically 95-99% where well run; one construction-materials distributor case shows 94.1% on time and 95.7% in full (S-033, Low-Medium reliability). Company A's baseline is unknown.
-- **Targets (3 and 12 months after launch):** not set. `[D-13]` Recommended default: baseline measured in the first 4 weeks of the pilot; targets agreed as percentage-point gains over that baseline, then confirmed.
+**Orders approved without edits** (OAWE).
+- **Definition:** among orders for which the assistant produced a draft, the share that the order handler approved with no change to customer, lines, quantities, units, SKUs, prices or delivery date. Measured weekly per office and market.
+- **Why it reflects value:** it is the point where interpretation work has moved from the person to the assistant while the person remains accountable. It is the first measure in the user's plan (R-27).
+- **Guardrail pairing:** it is only meaningful together with the post-approval line error rate (§3), because approving a wrong draft without edits would otherwise score as success.
+- **Benchmarks (adjacent, not identical):** APQC touchless order rate: average ~67%, top performers ~94% (S-057, cross-industry, fully touchless); Esker/Siemens Healthineers: automated-order rate 8% → 85% (S-052, vendor). Company A baseline unknown.
+- **Targets at 3 and 12 months:** set after the weeks 1-2 baseline, as gains over baseline (R-27, D-13 decided).
 
 ## 3. Stage metrics and guardrails
-| Stage | Metric | Definition | Measurement event (for Step 11) | Benchmark |
+| Stage | Metric | Definition | Measurement event (names finalised in Step 11) | Benchmark |
 |---|---|---|---|---|
-| AWR | Promise coverage | Share of eligible orders created with a Hub promise (the Hub is not an acquisition channel, so reach = coverage of order channels) | `promise_requested`, `order_created` | none; baseline |
-| CON | Promise-to-order conversion | Promise views that become confirmed orders | `promise_shown`, `order_confirmed` | none; baseline |
-| DEC | Window-confirmation rate and time-to-aha | Orders with a confirmed window (and site details for trade) within 24 h of ordering; median time to first confirmed window | `window_confirmed` | none; baseline |
-| RET | Kept-promise rate (North Star), exception resolution time | KPR as §2; median hours from exception raised to resolved | `delivered`, `exception_raised`, `exception_resolved` | OTIF 95-99% (S-033) |
-| ADV | Post-delivery NPS | NPS question after delivery or after case closure | `survey_answered` | retail 37-42; Nordic average ~49 (S-035, Low-Medium) |
+| Mandate/Rollout | Adoption | Share of order messages in the pilot office processed through the workspace (vs outside it) | `message_received`, `message_opened_in_workspace` | none; baseline |
+| AWR | Not served | Existing B2B customers already email their orders; the product changes handling, not discovery | — | — |
+| CON | Not served | Same reason; customers keep their channel (R-25) | — | — |
+| DEC | **Orders approved without edits** (North Star) and **time to confirmation** (median minutes from message received to confirmation sent) | As §2 and §3 text | `draft_created`, `draft_approved`, `draft_edited`, `confirmation_sent` | S-052, S-057 |
+| RET | **Line error rate** (credit notes coded wrong item, quantity or price per 1,000 order lines) and **handling time per order** (median minutes of handler time, measured at team level) | R-27 measures | `credit_note_coded` (from ERP), `handling_time_recorded` | APQC cost per order context (S-048) |
+| ADV | Handler usefulness | Anonymous team-level score from a short in-product pulse | `pulse_answered` | none |
 
 Guardrails:
-1. **"Where is my order" contacts per 100 deliveries** — should fall; context 35-60% of e-commerce contacts (S-025, Low).
-2. **First-contact resolution of exceptions** — 72-78% retail average (S-034, Low).
-3. **Promise calibration** — share of "high-confidence" promises that fail; must stay below a threshold to be set after baseline `[D-13]`.
-4. **Staff-data guardrail:** metrics about staff are aggregate by team/store only; no per-employee ranking (S-012, S-014).
+1. **Post-approval line error rate** must not rise versus baseline (protects the North Star).
+2. **Exception-queue backlog age** (oldest unhandled item) stays below a threshold set after baseline.
+3. **Cost per processed order** (LLM and run cost) stays below a ceiling set after baseline (D-13 decided).
+4. **Structural guardrail (R-26):** no metric is reported, stored or displayed at the level of an individual employee; aggregation is by team and office only.
 
 ## 4. Business-model snapshot
-- **Who pays:** Company A (board investment, R-12 context); no external customer price. Cost allocation to countries is a Company A decision `[D-16]`.
-- **Value logic:** fewer cancelled/failed orders, fewer contacts, fewer claims, more repeat orders; sizing pending `[D-07]`.
-- **Acquisition/adoption channel:** internal rollout by country management; customers reached through Company A's existing ordering channels.
-- **Main cost drivers:** integration per country, notification (SMS) volumes, hosting, support and change management.
-- **Key partners:** carriers/TMS vendors, the country systems' vendors, an SMS/email provider.
+- **Who pays:** Company A (executive board investment); no external price for the pilot.
+- **Supplier angle (context, S-037 §3):** the solution is intended to be productisable and resellable to other wholesalers, supporting Netcompany's EBITDA target for 2029 (R-29); this is not a Company A requirement.
+- **Value logic:** handler time released, fewer line errors and credit notes, faster confirmations. Sized only by the labelled illustrative model (R-31) until the baseline.
+- **Adoption channel:** internal rollout through the order-office lead; customers are reached by the existing order mailbox.
+- **Main cost drivers:** ERP integration per market, LLM usage, change management, evaluation and monitoring.
+- **Key partners:** ERP vendor/IT owner (STK-11), LLM provider (STK-12, D-19), mail platform.
 
 ## 5. To-be journey and aha moment
-**Aha moment (customer):** the first order where the confirmed window is kept and the customer never had to chase.
-**Aha moment (staff):** the first exception handled from one order view with a clear owner.
+**Aha moment (handler):** the first morning the queue holds ready drafts and the handler clears the easy ones with one click each.
+**Aha moment (customer):** a correct, correctly priced confirmation arrives within minutes, with no need to ask.
 
-| Stage | What changes for the persona | Surfaces | Release |
+| Stage | What changes | Surfaces | Release |
 |---|---|---|---|
-| Awareness | Not served as a marketing stage: customers already know Company A; reason: the Hub is an internal investment (R-12), not an acquisition channel | — | — |
-| Consideration | Availability and date shown are believable, with a confidence level | Promise widget/API in ordering channel; staff promise lookup | R1 |
-| Decision | Customer confirms a delivery window; trade gives site details | Window selection, site-details form | R1 |
-| Retention | Day-before and live-window updates, tracking, proof of delivery; exceptions reported once and followed through | Status page, SMS/email, exception report, case tracking, staff workbench | R1 (case tracking R2) |
-| Advocacy | Fewer unresolved complaints; post-delivery feedback | Survey, closure message | R1 (survey), reviews are handled outside the product |
-| Staff Mandate/Rollout | Early information and consultation (NO, SE), clear purpose and aggregate-only metrics | Rollout plan §9; staff guidance F-22 | R1 |
+| Mandate/Rollout | Staff know what the assistant does and does not do (no individual monitoring); the order-office lead configures and monitors | Onboarding and guidance, admin, lead view | R1 |
+| AWR, CON | Not served (reasons in §3) | — | — |
+| DEC | Message → draft → one-click approval → confirmation; exceptions queued by confidence | Mailbox connector, review workspace, confirmation email | R1 |
+| RET | Drafts are written to the ERP; corrections feed learning; exceptions after the order are listed | Write-back, exceptions list, dashboard | R1 (auto-approval policy and tuning R2) |
+| ADV | Handlers rate usefulness; customers feel faster service | Pulse | R1 |
 
 ## 6. Completeness checklist
 | Surface | Covered by | N/A reason |
 |---|---|---|
-| Public entry (website/landing/app listing) | — | N/A: no public marketing site; customers arrive via Company A's existing ordering channels and SMS/email links |
-| Sign-up, login, logout, session expiry | F-13 (staff SSO), F-21 (customers: secure order links) | Customer self-registration N/A: customers use existing accounts or links |
-| Identity verification / KYC | — | N/A: no regulated identity checks |
-| Onboarding to the aha moment | F-22 (staff onboarding), F-02 (first window) | Customer onboarding N/A: first order is the onboarding |
+| Public entry (website/landing/app listing) | — | N/A: internal staff product; customers use their existing email channel |
+| Sign-up, login, logout, session expiry | F-19 (staff SSO) | Customer sign-up N/A: customers have no accounts in this product |
+| Identity verification / KYC | — | N/A: staff identity via corporate SSO; customers not identified by the product beyond ERP records |
+| Onboarding to the aha moment | F-26 | — |
 | Core loop features | F-01..F-12 | — |
-| Roles & permissions; invitations | F-13 | — |
-| Admin / back-office tools to run the service | F-10, F-14, F-11 | — |
-| Settings & profile; notification preferences | F-14 (admin settings), F-16 (customer preferences) | — |
-| Notifications | F-04 | — |
-| Payments, billing, invoices, refunds | — | N/A: no money moves in the Hub; claim outcomes (credit/refund) are executed in existing finance systems and recorded in F-10 |
-| Consent, terms, privacy, cookies | F-15 | — |
-| Data subject rights: export, correction, deletion | F-15 | — |
-| Help, support contact, feedback | F-18, F-25 | — |
-| Audit log / activity history | F-15 | — |
-| Integrations & webhooks | F-19, F-08, F-23, F-24 | — |
-| Analytics instrumentation | F-20 | — |
-| Error, maintenance, not-found; degraded behaviour | F-18 | — |
-| Localisation | F-17 | — |
-| Accessibility commitments | F-26 | — |
+| Roles & permissions; invitations | F-19 | Invitations N/A: users come from corporate SSO groups |
+| Admin / back-office / operator tools | F-13, F-14, F-16, F-17 | — |
+| Settings & profile; notification preferences | F-16 (admin settings), F-22 (user preferences) | — |
+| Notifications | F-22 (staff), F-09 (customer confirmation email) | — |
+| Payments, billing, invoices, refunds | — | N/A: no money moves; prices are read from the ERP |
+| Consent, terms, privacy, cookies | F-20 | Cookie consent N/A: staff app without tracking cookies beyond strictly necessary (to confirm in Step 11) |
+| Data subject rights: export, correction, deletion | F-20 | — |
+| Help, support contact, feedback | F-23, F-27 | — |
+| Audit log / activity history | F-20 | — |
+| Integrations & webhooks | F-01, F-05, F-08, F-18, F-29, F-35, F-36 | — |
+| Analytics instrumentation | F-28 | — |
+| Error, maintenance, not-found pages; degraded behaviour | F-23 | — |
+| Localisation | F-23, F-31 | — |
+| Accessibility commitments | F-25 | — |
 
 ## 7. Scope table — complete product
 
 | F-ID | Feature | Type | Stage | O-IDs / basis | Release | Priority | Notes |
 |---|---|---|---|---|---|---|---|
-| F-01 | Availability and delivery promise at ordering (widget/API for channels + staff lookup), with confidence and "call branch" fallback | user-facing | CON, DEC | O-01 | [R1] | P1 | `[D-14]` which channel(s) host it in R1 |
-| F-02 | Delivery window selection, confirmation, reschedule, change receiver, cancel (within rules) | user-facing | DEC | O-01, O-02 | [R1] | P1 | critical path to aha |
-| F-03 | Site details for trade deliveries (access point, receiver, unloading needs) | user-facing | DEC | O-02, P-06 | [R1] | P2 | `[D-02]`: raise to P1 if pros are the beachhead |
-| F-04 | Order and delivery status page; notifications (confirmation, day-before, live window, delay, delivered) by SMS/email | user-facing | RET | O-02 | [R1] | P1 | SMS read rates very high (S-036, Low) |
-| F-05 | Proof of delivery view and customer exception report (damaged, missing, wrong) with photos | user-facing | RET | O-03 | [R1] | P1 | |
-| F-06 | Customer case tracking and proactive updates for exceptions and claims | user-facing | RET, ADV | O-04 | [R2] | P2 | R1 uses F-10 plus email updates sent via F-04 |
-| F-07 | Promise engine: rules-based availability-to-promise (stock by location, supplier lead time, delivery capacity, cut-offs, calendars) | back-office | CON, DEC | O-01 | [R1] | P1 | core |
-| F-08 | Pilot-market adapter(s) and canonical order/stock/delivery data model; data-quality monitoring | integration | all | O-01, R-22, D-12 | [R1] | P1 | adapters depend on D-03 |
-| F-09 | Delivery-event capture (driver app or carrier/TMS integration): status, proof of delivery, photos, signature | integration | RET | O-02, O-03 | [R1] | P1 | build vs integrate decided in Step 11 |
-| F-10 | Exceptions and claims workbench: unified order view, ownership, SLA timers, templates, supplier/carrier recovery | back-office | RET | O-04, O-03 | [R1] | P1 | `[D-15]` operating owner per country |
-| F-11 | Control-tower dashboard: KPR, promise accuracy, contacts, exceptions, claims; aggregate by market/branch | back-office | RET | North Star, stage metrics | [R1] | P2 | needed for baseline `[D-13]` |
-| F-12 | AI-assisted functions: delivery-date/ETA prediction, exception triage, message drafts (human-overridable) | back-office | RET | O-01, O-04 | [R2] | P2 | needs ≥ 6 months of delivery data (S-032); R-20 |
-| F-13 | Staff identity and access: corporate SSO, roles and permissions per country/branch | operational | all | security | [R1] | P1 | |
-| F-14 | Admin: per-country configuration of rules, calendars, languages, templates, feature flags | operational | all | R-08 | [R1] | P1 | |
-| F-15 | Consent, privacy notices, retention, customer data export/deletion, audit log, DPIA artefacts | operational | all | GDPR, S-014 | [R1] | P1 | required to operate legally |
-| F-16 | Notification preferences and opt-out | operational | RET | GDPR/ePrivacy basis, to confirm in Step 11 | [R1] | P2 | |
-| F-17 | Localisation framework and pilot-market language | operational | all | R-10 | [R1] | P2 | further languages arrive with F-23/F-24 |
-| F-18 | Help content, status/maintenance/not-found pages, degraded-mode behaviour | operational | all | NFR | [R1] | P2 | |
-| F-19 | Integration API and webhooks for webshop, trade app, counter/POS and other channels | integration | all | R-08, R-22 | [R1] | P1 | |
-| F-20 | Analytics instrumentation for stage metrics | operational | all | §3 | [R1] | P2 | |
-| F-21 | Customer access via secure order links or existing account | operational | DEC, RET | auth model | [R1] | P1 | |
-| F-22 | Staff onboarding and in-app guidance; rollout materials hosted in the product | operational | Mandate/Rollout | S-012, S-013 | [R1] | P2 | consultation itself is a rollout activity, §9 |
-| F-23 | Adapter and language set for second market | integration | all | R-11 | [R2] | P1 | market per `[D-04]` sequence |
-| F-24 | Adapter and language set for third market | integration | all | R-11 | [R3] | P1 | |
-| F-25 | Feedback capture and post-delivery survey | user-facing | ADV | ADV metric | [R1] | P3 | |
-| F-26 | Accessibility conformance for customer-facing pages (WCAG 2.2 AA commitment) | operational | all | accessibility checklist | [R1] | P2 | |
+| F-01 | Mailbox connector: ingest email, PDF, Excel from configured order mailboxes; de-duplication, threading, attachments, non-order filtering | integration | DEC | O-01 | [R1] | P1 | critical path |
+| F-02 | Message classification and routing: order, quote request, status request, complaint, other | back-office | DEC | O-01 | [R1] | P1 | MVP acts on order and status; others routed to a human queue |
+| F-03 | Order extraction: customer, site, lines, quantities, units, delivery wishes, each with confidence | back-office | DEC | O-01 | [R1] | P1 | R-28 |
+| F-04 | SKU matching on catalogue and purchase history (top ~2,000 SKUs first), unit normalisation, alternatives | back-office | DEC | O-01 | [R1] | P1 | R-25 |
+| F-05 | Price and availability check (read-only): contract/project price, stock, credit from the ERP | integration | DEC | O-01, O-02 | [R1] | P1 | rules, not AI (R-28) |
+| F-06 | Delivery-date proposal with a confidence level (rule-based) | back-office | DEC | O-02 | [R1] | P2 | G2 borrow (R-23) |
+| F-07 | Review workspace: message and draft side by side; approve in one click; edit lines; reject, forward, reassign; exception queue by confidence | user-facing | DEC | O-01, O-03 | [R1] | P1 | critical path |
+| F-08 | Draft-order write-back to the ERP via API with RPA fallback; idempotency, retry, error queue, status sync | integration | DEC | O-01 | [R1] | P1 | RK-07, D-23 |
+| F-09 | Customer confirmation in the customer's language after approval; templates; reply tracking | user-facing | DEC | O-02 | [R1] | P1 | Danish with English fallback (D-20) |
+| F-10 | Status-request answers from ERP data, sent after approval | user-facing | DEC | O-02 | [R1] | P2 | S-037 §4.3 "order and status requests" |
+| F-11 | Correction capture as evaluation data; evaluation harness; model/prompt version metrics | back-office | RET | O-03, O-04 | [R1] | P1 | R-27 |
+| F-12 | Read-only list of exceptions after the order (missing site data, stock shortfall) | user-facing | RET | O-03 | [R1] | P3 | S-037 step 10 |
+| F-13 | Order-office lead view: queue monitor, assignment, service timers; aggregate only | user-facing | RET | O-03, R-26 | [R1] | P2 | four roles (D-22) |
+| F-14 | Measurement dashboard including baseline mode for weeks 1-2 | user-facing | RET | O-04, R-27 | [R1] | P1 | North Star and stage metrics |
+| F-15 | Shadow-mode comparison: assistant draft vs the human-entered order; no ERP write | back-office | DEC | R-27 (weeks 3-8) | [R1] | P1 | part of the real rollout plan, not a demo device |
+| F-16 | Admin configuration: mailboxes, SKU scope, confidence thresholds, templates, languages, feature flags per market, model/prompt versions | operational | all | R-24, R-26 | [R1] | P1 | |
+| F-17 | Master-data sync (catalogue, units, customer purchase history) and a customer-specific alias dictionary managed by handlers | integration | DEC | O-01 | [R1] | P1 | |
+| F-18 | Pilot-market adapters for ERP and mail (Denmark) | integration | all | R-30, D-23 | [R1] | P1 | |
+| F-19 | Staff identity and access: corporate SSO, roles, scoping by office/market | operational | all | security, (D-22 decided) | [R1] | P1 | |
+| F-20 | Privacy and audit: DPIA artefacts, retention and deletion, redaction before LLM calls, data-subject requests for customer contacts, audit log of approvals and ERP writes | operational | all | GDPR (S-014) | [R1] | P1 | required to operate legally |
+| F-21 | LLM gateway: provider abstraction, prompt versioning, injection guardrails, cost metering, EU region | operational | all | S-055, (D-19 decided) | [R1] | P1 | |
+| F-22 | Staff notifications (queue alerts) and preferences | operational | DEC | O-03 | [R1] | P3 | |
+| F-23 | Localisation, help, status/maintenance/not-found pages, degraded mode (AI unavailable → messages pass through unprocessed) | operational | all | NFR | [R1] | P2 | (D-20 decided) |
+| F-24 | Observability: mailbox, ERP and model health; alerts | operational | all | NFR | [R1] | P2 | |
+| F-25 | Accessibility conformance for the review workspace (WCAG 2.2 AA commitment) | operational | all | accessibility checklist | [R1] | P2 | |
+| F-26 | Staff onboarding and in-product guidance; rollout materials stating what the assistant does and does not do | operational | Mandate/Rollout | R-26 | [R1] | P2 | |
+| F-27 | Feedback and support channel to the project team | operational | ADV | support | [R1] | P3 | |
+| F-28 | Analytics instrumentation for stage metrics | operational | all | §3 | [R1] | P2 | |
+| F-29 | Additional intake channels: phone/voicemail transcripts, photo/image orders, EDI change messages | integration | DEC | O-01, S-037 §4.3 | [R2] | P1 | |
+| F-30 | Complaint and return message handling: classify, draft acknowledgement, route to a case queue (no claims processing) | user-facing | DEC, RET | O-03, S-037 §4.3 | [R2] | P2 | claims handling stays parked |
+| F-31 | Full-catalogue matching and additional languages | back-office | DEC | O-01, S-037 §4.3 | [R2] | P1 | |
+| F-32 | Confidence-based auto-approval policy (gradual autonomy) with guardrails and audit | back-office | DEC | O-01, S-037 §4.3 | [R2] | P2 | requires baseline data |
+| F-33 | ML-based delivery-date estimate once 6+ months of delivery data exist | back-office | DEC | O-02, S-032 | [R2] | P3 | |
+| F-34 | Model tuning from stored corrections, with evaluation-gated release | back-office | RET | O-03, S-037 §4.3 | [R2] | P2 | |
+| F-35 | Norway adapter set: ERP/mail adapters, Norwegian language, local configuration | integration | all | R-24, S-037 §4.3 | [R3] | P1 | |
+| F-36 | Sweden adapter set: ERP/mail adapters, Swedish language, local configuration | integration | all | R-24, S-037 §4.3 | [R3] | P1 | |
+| F-37 | Sweden proactive delivery exceptions linked to carrier or transport-visibility tools | integration | RET | O-02, S-037 §4.3 | [R3] | P3 | tools optional and vendor-neutral (D-18) |
 
-Release summary: **R1** delivers the full promise-to-resolution loop in the pilot market — promise, window confirmation, tracking and notifications, proof of delivery, exception reporting, the staff workbench, dashboard, adapters, access, compliance and admin — on one deployable footprint. **R2** adds the second market, customer case tracking and AI-assisted functions. **R3** adds the third market.
+Release summary: **R1** delivers the full order-intake loop for the Denmark pilot office: mailbox in, extraction and matching, pricing and checks, review and one-click approval, write-back, confirmation, measurement, shadow mode, and every operational surface needed to run it legally and safely. **R2** adds channels (phone, photos, EDI changes), complaint and return routing, the full catalogue and more languages, auto-approval by confidence, ML delivery estimate and model tuning. **R3** adds Norway and Sweden adapter sets and Swedish proactive delivery exceptions.
 
-Product definition: *The Promise & Delivery Hub gives Company A's customers, branches, dispatch and support a reliable delivery promise and a single, owned path through any exception, so that promises made are promises kept.*
+Product definition: *The Order Intake Assistant reads the orders Company A's trade customers already send and prepares correct, priced draft orders that order handlers approve in one click, so that interpretation work moves from people to the assistant while people stay in control.*
 
 ## 8. Parking Lot (sole owner)
 | PL-ID | Item | Why outside scope | Revisit condition | Status |
 |---|---|---|---|---|
-| PL-01 | Store stock-accuracy and store-task execution programme (Concept 2, O-05) | Outside the chosen solution; evidence thin (P-07, RK-03); highest labour-law friction | Pilot baseline shows stock data quality is the binding constraint (D-09, D-10) | open |
-| PL-02 | Manual back-office process automation (U-01, Denmark) | No evidence on which processes `[D-08]` | D-08 answered with named processes | open |
-| PL-03 | Replacement of ERP/POS | Conflicts with R-15; Lidl case (S-029); RK-01 | Integration proves infeasible in all markets | open |
-| PL-04 | Price harmonisation across markets | Out of scope pain (E15, E27) | Board request | open |
-| PL-05 | Supplier portal for sharing lead times | Idea beyond the solution; lead times come through adapters in R1 | Supplier data quality limits promise accuracy | open |
+| PL-01 | Project-quote automation (G5) | Excluded by the user (R-26) | After R1 baseline shows quote handling is large | open |
+| PL-02 | Forecasting and replenishment (G6) | Excluded by the user (R-26); already served by specialists (S-051) | Board request | open |
+| PL-03 | ERP replacement or consolidation (G10) | Excluded by the user (R-26); S-029 | Overlay proves infeasible | open |
+| PL-04 | Delivery orchestration and proactive tracking beyond the date proposal (G2) | Outside the chosen solution; ranked second (S-037 §3) | Nordic data show late/failed deliveries above 10% (S-037 §4.2) | open |
+| PL-05 | Store staff assistant (G3), PIM (G4), claims and credit-note processing (G8), account opening and credit (G9), click and collect / OMS (G7) | Outside the chosen solution; weaker evidence (S-037 §2-3) | Per S-037 ranking-change table | open |
+| PL-06 | DIY consumer features | D-02 decided: B2B only | Board request | open |
+Permanently excluded (not parked): monitoring of individual employees (R-26).
 
-## 9. Scale: rollout across markets (from the brief's "Scale")
-One core product, three implementations (R-08). Pilot market per `[D-04]`; recommended Sweden (consistent delivery-pain evidence, S-004, S-007, S-020; MBL §11 negotiation first, S-013).
+## 9. Scale: rollout across markets
+One core, per-market adapter sets (R-24, R-26). Denmark is R1 (pilot); Norway and Sweden are R3 (F-35, F-36).
 
-| | Sweden | Norway | Denmark |
+| | Denmark (R1) | Norway (R3) | Sweden (R3) |
 |---|---|---|---|
-| Brief's stated priority | Delivery and fulfilment | Store operations | Manual processes `[D-08]` |
-| Employee-facing legal step | Negotiation under MBL §11 before significant change (S-013) | Consultation under WEA ch. 9 for control measures; aggregate metrics (S-012) | GDPR, Datatilsynet focus on monitoring (S-014) |
-| What the Hub stresses | Delivery visibility, exceptions | Same product; staff-facing parts need early representative involvement; data-quality alerts rather than staff tasks | Same product; automate exception admin first; revisit PL-02 once `[D-08]` |
-| Systems adapter | `[D-03]` unknown | `[D-03]` | `[D-03]` |
-| Release | per D-04 | per D-04 | per D-04 |
+| Brief's stated priority | Manual processes (the chosen opportunity) | Store operations (not this product) | Delivery and fulfilment (F-37 only) |
+| Employee-facing legal step | GDPR; Datatilsynet scrutiny of monitoring (S-014); Danish consultation rules not yet researched | Working Environment Act ch. 9 applies to control measures; this product has none by design (R-26), consultation on changed work routines to be confirmed (S-012) | MBL §11 negotiation before significant changes (S-013) |
+| Adapters | ERP/mail for the pilot (D-23) | (D-03 accepted-risk) | (D-03 accepted-risk) |
+| Language | Danish, English (D-20 decided) | Norwegian (R2/R3) | Swedish (R2/R3) |
 
 ## 10. Scope decision log
 | Feature | Decision | Rationale | Evidence / D-ID |
 |---|---|---|---|
-| F-12 | R2 | Needs delivery history; rules-based promise first | S-032, R-20 |
-| F-06 | R2 | R1 exceptions are visible by notification and handled in F-10 | O-04 |
-| F-23/F-24 | R2/R3 | Single pilot market in R1 | R-11, R-15 |
-| Concept 2 and U-01 | Parking Lot | Not part of chosen solution | PL-01, PL-02 (D-08, D-09) |
-| Nothing required by Step 07 was moved to the Parking Lot | — | — | — |
+| F-29..F-34 | R2 | From S-037 "Later phases" column | D-26 |
+| F-35..F-37 | R3 | Same | D-26, D-18 |
+| F-06 | R1 with rule-based date | S-037 step 5 | R-28 |
+| F-15 | R1 | Shadow mode is part of weeks 3-8 | R-27 |
+| Delivery orchestration | Parking Lot | Chosen solution is order intake | PL-04 |
+| Nothing required by Step 07's list was moved to the Parking Lot | — | — | — |
 
 ## Open decisions raised at this step
-D-13 North Star targets/baseline; D-14 first-release ordering channel(s); D-15 who operates exceptions per country; D-16 cost allocation to countries.
+All decisions raised here were resolved at the Step 12 closure (see `_decisions.md` and `05-deliver/12-closure-log.md`).
 
 ## Deliverables checklist
-- [x] North Star defined exactly once
-- [x] One metric per journey stage (AWR stated as coverage with reason)
-- [x] Every capability in Step 07's list is an F-ID (Step 07 items 1-20 → F-01..F-20; additions F-21..F-26 from the completeness checklist)
+- [x] North Star defined exactly once (OAWE)
+- [x] One metric per journey stage (AWR/CON/ADV stated as not served or pulse, with reasons)
+- [x] Every Step 07 capability (1-25) is an F-ID (F-01..F-28 incl. additions; R2/R3 F-29..F-37)
 - [x] Completeness checklist answered
 - [x] Every F-ID has a release; R1 deployable on its own
 - [x] No demo-only items, no `[MVP]` labels
-- [ ] Gate A passed (pending user)
+- [x] Gate A passed (2026-10-23, on the user's instruction to run to the PRD on the decisions in S-037)

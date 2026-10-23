@@ -124,3 +124,45 @@ The executive board is the buyer (STK-1) and appears only in the Mandate / Rollo
 - [x] Buyer vs user explicit
 - [x] Stakeholder map and tensions present
 - [x] Lanes listed for Step 05
+
+---
+# Update 2026-10-23 — beachhead resolved by the user (D-02) and new primary persona
+
+## U1. Beachhead
+D-02 is **decided**: B2B trade customers with contract prices and the order handlers who serve them (R-25, S-037 §4.3). DIY consumers are not targeted in this scope (Phase-2 / not targeted). This replaces the provisional tie between SEG-1 and SEG-2 above.
+
+| Segment | Role | Status |
+|---|---|---|
+| SEG-1 Trade customers (existing B2B, contract prices) | Sends orders by email/PDF/Excel/phone | Beachhead (customer side) |
+| SEG-3a Order handlers (store / regional order office) | Reads, matches, prices, keys, confirms | **Primary user** of the product |
+| SEG-2 DIY consumers | — | Not targeted |
+| SEG-3 Other store staff | — | Not targeted |
+
+## U2. Personas (additions; PER-2 DIYer is now out of scope)
+### PER-4 — "Order handler" (SEG-3a) — **primary user**
+**Role / context:** employee in a store or regional order office who receives B2B orders by email/PDF/phone and enters them in the ERP | **Buyer, user, or both:** user (buyer = executive board) | **Primary**
+
+| Attribute | Content | Evidence |
+|---|---|---|
+| Goals | Not evidenced in the handler's words — omitted | — |
+| Current alternative / workaround | Reads each message, matches items to SKUs, applies the contract price, keys the order into the ERP | S-037 §2 G1, S-043 |
+| Frustrations | Re-keying ("type all of that into our ERP"); order and quote handling sits inside general sales roles so the cost is invisible | E38, S-037 §4.1 |
+| Context of use | Regional order mailbox; branch order emails; ERP such as AS400 at STARK (Company A's ERP unknown) | S-043, S-044, S-042 |
+| Tools used | Email, ERP, phone | S-043, S-042 |
+| Tech proficiency, decision authority | not evidenced — omitted | — |
+
+### PER-1 — "Trade customer ordering by email" (SEG-1), revised
+Small/mid contractor with contract prices who sends orders as lists, PDFs, photos or emails. Goals/frustrations as above in Step 04 (S-017, S-011) and E32-E37: wants a fast confirmation, correct prices, no need to "ask for a quote". Tech proficiency and decision authority are not evidenced.
+
+## U3. Stakeholder map (additions)
+| ID | Stakeholder | Role | Gives | Gets | Infl. | Int. | Evidence |
+|---|---|---|---|---|---|---|---|
+| STK-10 | Order-office lead / sales manager | Supervises handlers, owns exception handling | Approval of working practice, rules | Faster, more accurate order intake | H | H | S-044 (ordrekontor) |
+| STK-11 | ERP / IT owner in Denmark | Controls API/write access | Access, change windows | A safe overlay | H | M | S-042 (AS400), S-037 |
+| STK-12 | LLM / cloud provider | Processes message content | Model API | Usage fees | M | L | D-19 |
+| STK-13 | Customer service | Receives status queries and complaints | — | Fewer "where is my order" queries | L-M | M | S-037 G2 |
+
+Tensions added: (1) efficiency vs perceived monitoring of handlers: resolved by R-26 (no individual monitoring; aggregate measures only); (2) relationship value of phone/email vs digitisation: portals fail (S-047), so the product keeps the channel and removes the re-keying; (3) legacy ERP write access vs 12-week plan (RK-07, D-23).
+
+## U4. Lanes for Step 05 (revised)
+1. **Trade customer lane (SEG-1):** order-by-email path, B2B. 2. **Order handler lane (SEG-3a):** internal form (Mandate/Rollout replaces Awareness + Consideration). The earlier delivery lanes stay on file for the delivery-promise check.

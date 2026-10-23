@@ -88,3 +88,41 @@ Out of scope pains logged for completeness: price perception and cross-border pr
 - [x] Every P-ID has stage, lane, severity, frequency, workaround and S-IDs
 - [x] Bottleneck named with evidence; cross-lane deadlock flagged as hypothesis
 - [x] No solutions or features in this file
+
+---
+# Update 2026-10-23 — B2B order-intake journey (as-is, via S-037)
+
+*No solutions here. Pains P-09 to P-11 are added to the registry above; P-01 to P-08 remain valid for the delivery-promise check and for the parked delivery work. Evidence is mostly job ads, statistics and trade press; size of the problem is unmeasured.*
+
+## U1. Lane C — Order handler (SEG-3a), internal form
+| Field | Mandate / Rollout | Decision (receive to key) | Retention (daily use) | Advocacy |
+|---|---|---|---|---|
+| Trigger | Board invests (S-001); in Denmark, GDPR/monitoring scrutiny (S-014) | An order message arrives in the mailbox or by phone | Daily routine | not evidenced |
+| Goal | Understand what changes | Turn the message into a correct, priced ERP order | Keep the queue moving | — |
+| Actions | — | Read; identify customer and site; match items to SKUs; apply contract price; check stock/credit; key into the ERP; confirm to the customer (S-037 G1) | Same, at volume | — |
+| Touchpoints | Order-office lead | Order mailbox, ERP, phone (S-044, S-043) | Same | — |
+| Thoughts | no evidence | "type all of that into our ERP" (E38, dealer, vendor-arranged) | no evidence | — |
+| Emotion | not evidenced | −1 (E38 only) | not evidenced | — |
+| Pains | — | P-09, P-10 | P-09, P-10 | — |
+| Workaround | — | Manual re-keying; AS400 at STARK (S-042) | Same | — |
+| Moment of truth | Whether staff see it as support, not surveillance (R-26) | **Interpreting an ambiguous line correctly** | — | — |
+| Evidence strength | thin | ok for existence, thin for effort | thin | thin |
+
+## U2. Lane A (customer) — B2B order path additions
+| Stage | What happens today for a trade customer | Pains | Evidence |
+|---|---|---|---|
+| Awareness | Needs materials for a job | — | thin |
+| Consideration | Uses the merchant's order mailbox, phone or counter; portal avoided (E34) | — | S-047, S-040 |
+| Decision | Sends list/PDF/photo; waits for confirmation; asks for quotes (E36, E37) | P-10, P-11 | thin (single reviews) |
+| Retention | Receives goods; any shortfall or price error comes back as a complaint | P-01..P-04 (earlier) | S-004..S-010 |
+| Advocacy | Reviews | P-08 | — |
+
+## U3. Registry additions
+| ID | Pain | Stage | Lane | Segment | Severity | Freq. | Workaround | Evidence |
+|---|---|---|---|---|---|---|---|---|
+| P-09 | Unstructured B2B orders (email, PDF, Excel, photo, list, phone) must be read and re-keyed into the ERP | DEC | C (and A) | SEG-3a, SEG-1 | M-H (unmeasured) | H existence, size unknown | Staff re-keying | S-038, S-039, S-043, S-044, S-046 → 4+ source types; **size weak** |
+| P-10 | SKU matching of trade shorthand and application of contract prices by hand | DEC | C | SEG-3a | M | unknown | Staff knowledge, ERP search | S-043, S-049 → `Evidence: thin` |
+| P-11 | Quotes and order confirmations slow or missing | DEC | A | SEG-1 | M | single reviews | Chasing by phone | S-037 via S-005 → `Evidence: thin` |
+
+## U4. Bottleneck (B2B order path)
+**Between receipt of the message and the confirmed ERP order** (steps Receive → Confirm). Evidence of existence is strong (4+ source types); evidence of cost is absent (R-27 baseline). **Cross-lane link:** the customer's confirmation speed and correctness depend on the handler's interpretation work; the delivery date given at confirmation inherits the earlier promise problem (P-01, P-02). That link is why the delivery-promise check sits inside the chosen scope (R-23).

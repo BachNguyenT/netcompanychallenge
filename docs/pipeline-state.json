@@ -3,10 +3,10 @@
   "product": "Company A Nordic Retail Digital Solution (working name)",
   "slug": "netcompany",
   "created": "2026-10-16",
-  "last_updated": "2026-10-21",
+  "last_updated": "2026-10-23",
   "input_type": "problem-led",
   "context": "competition",
-  "current_step": "08",
+  "current_step": null,
   "tracks": {
     "business_case": true,
     "design": true,
@@ -30,10 +30,12 @@
       "date": "2026-10-16"
     },
     "A": {
-      "status": "awaiting_user"
+      "status": "passed",
+      "date": "2026-10-23"
     },
     "closure": {
-      "status": "pending"
+      "status": "passed",
+      "date": "2026-10-23"
     },
     "B": {
       "status": "pending"
@@ -80,35 +82,46 @@
     },
     "06": {
       "status": "done",
-      "completed": "2026-10-21",
+      "completed": "2026-10-23",
       "searches": 4,
       "file": "03-define/06-problem-statement.md"
     },
     "07": {
       "status": "done",
-      "completed": "2026-10-21",
+      "completed": "2026-10-23",
       "searches": 5,
       "depth": "full",
-      "file": "03-define/07-solution-proposal.md",
-      "reason": "problem-led input; three distinct concepts compared"
+      "reason": "user concept untested in building materials; counter-evidence; two alternative mechanisms compared",
+      "file": "03-define/07-solution-proposal.md"
     },
     "08": {
       "status": "done",
-      "completed": "2026-10-21",
-      "searches": 3,
+      "completed": "2026-10-23",
+      "searches": 2,
       "file": "03-define/08-product-strategy-scope.md"
     },
     "09": {
-      "status": "pending"
+      "status": "done",
+      "completed": "2026-10-23",
+      "searches": 2,
+      "file": "04-specify/09-solution-design.md"
     },
     "10": {
-      "status": "pending"
+      "status": "done",
+      "completed": "2026-10-23",
+      "searches": 0,
+      "file": "04-specify/10-epics-user-stories.md"
     },
     "11": {
-      "status": "pending"
+      "status": "done",
+      "completed": "2026-10-23",
+      "searches": 6,
+      "file": "04-specify/11-solution-architecture.md"
     },
     "12": {
-      "status": "pending"
+      "status": "done",
+      "completed": "2026-10-23",
+      "file": "05-deliver/12-prd.md"
     },
     "13": {
       "status": "pending"

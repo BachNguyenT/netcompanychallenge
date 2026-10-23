@@ -97,3 +97,38 @@ Step 05 owns the numbered P-IDs. Frequency = mentions across independent sources
 - [x] All five stages attempted; thin stages listed under Evidence Gaps
 - [x] No primary research supplied (R-17)
 - [x] No methodology searches
+
+---
+# Update 2026-10-23 — evidence for unstructured B2B order intake (via S-037)
+
+*All rows below come from S-037 unless stated. They are secondary evidence (job ads, statistics, trade press); no primary research (R-17).*
+
+## U1. Added evidence rows
+Segments: **SEG-1** trade customers (B2B, existing, contract prices) · **SEG-3a** order handlers in stores / order offices (internal).
+
+| # | Stage | Segment | Evidence | Type | Emo | Source | Date |
+|---|---|---|---|---|---|---|---|
+| E28 | DEC | SEG-3a | Job ad, Beijer: "hämta/administrera order & offerter" (fetch/administer orders and quotes) | behaviour | 0 | S-043 | 2025-26 |
+| E29 | DEC | SEG-3a | Job ad, Bygma: "ordrebehandling og tilbudsgivning" (order processing and quoting) | behaviour | 0 | S-043 | 2025-26 |
+| E30 | DEC | SEG-3a | Job ad, Optimera: "ordremottak og ordreregistrering" (order reception and registration); an "ordrekontor" exists | behaviour | 0 | S-043, S-044 | 2025-26 |
+| E31 | DEC | SEG-3a | STARK branch job ad still names AS400 for goods registration; ~120 staff dedicated to B2B sales at Glostrup | behaviour | 0 | S-042 | 2026 |
+| E32 | CON/DEC | SEG-1 | Optimera and Beijer publish regional/branch order mailboxes: trade customers are invited to email orders | behaviour | 0 | S-044, S-043 | 2025-26 |
+| E33 | DEC | SEG-1 | ~35% of Solar's order lines still arrive outside digital channels (65% digital) | behaviour | 0 | S-038 | 2025 |
+| E34 | CON | SEG-1 | Portal uptake is low: about half of professional customers use Maxbo Proff, but revenue does not match user numbers | drop-off | −1 | S-047 | n.d. |
+| E35 | CON | SEG-1 | UK trade customers choose merchants on location (54.5%), service (54%), convenience (40.5%), advice (32.5%) | behaviour | 0 | S-040 | 2023 |
+| E36 | DEC | SEG-1 | STARK reviewer: "ALWAYS having to ask for a quote" (paraphrase of Trustpilot complaint) | pain | −2 | S-037 (via S-005) | 2026 |
+| E37 | DEC | SEG-1 | STARK reviewer: payment taken with no confirmation sent (single review) | pain | −2 | S-037 (via S-005) | 2026 |
+| E38 | DEC | SEG-3a | A dealer quoted at the Toolbx launch: staff would otherwise "type all of that into our ERP" | pain | −1 | S-046 / S-037 | 2026-09 |
+
+## U2. Pain candidates (additions)
+| Candidate | Stage | Segment | Frequency | Severity | Workaround | Evidence (source types) |
+|---|---|---|---|---|---|---|
+| H. Orders arrive unstructured and are re-keyed | DEC | SEG-3a, SEG-1 | Existence high, size unknown (E28-E33, E38) | Medium-High (unmeasured) | Order mailbox; staff read and key | company reports (S-038), statistics (S-039), job ads (S-043), trade press (S-044, S-046) → 4+ source types, **size not measured** |
+| I. SKU matching and contract-price application by hand | DEC | SEG-3a | Not measured | Medium | Staff knowledge, ERP search | job ads, supplier page (S-049) → thin |
+| J. Quotes and order confirmations are slow or missing | DEC | SEG-1 | Single reviews (E36, E37) | Medium | Phone / chase | reviews → thin |
+
+## U3. Evidence gaps (additions)
+- **Not found anywhere:** share of orders arriving as email/PDF/photo, minutes per order, order error rate (S-037 §2, G1).
+- Order-handler voice: none (still RK-03-like); only job ads.
+- Trade-customer voice on emailing orders: none first-hand.
+- No independent results for AI order entry in building materials (S-046).

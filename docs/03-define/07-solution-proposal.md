@@ -1,99 +1,105 @@
-Step 07 · Searches used: 5/6 · Sources: S-002, S-010, S-014, S-017, S-025..S-032
+Step 07 · Searches used: 5/6 · Sources: S-029, S-037, S-038, S-039, S-043, S-046, S-047, S-049, S-052..S-056
 
 # Step 07 — Solution Proposal (includes problem-solution fit)
 
 ## 1. Depth and reason
-**depth: full.** The input is problem-led (no user concept to validate), so three genuinely different mechanisms are compared (rule: Step 07 SKILL.md, Depth).
+**depth: full.** The user's concept (R-28) is part of the input, which would allow an abbreviated pass. Counter-evidence forces full depth instead: (a) no independent building-materials results exist for AI order entry (S-046), (b) my earlier Discover evaluated a different opportunity as strongest (archived), and (c) vendor material warns that automated order entry often degrades to assisted manual entry (S-053). The user's concept is therefore compared with two genuinely different mechanisms.
 
 ## 2. Concepts
 
-| Field | Concept 1 — Promise & Delivery Hub | Concept 2 — Store Stock Truth | Concept 3 — Care & Claims Desk |
+| Field | Concept 1 — Order Intake Assistant (user's concept) | Concept 2 — Structured self-service channel | Concept 3 — Template-based capture + RPA |
 |---|---|---|---|
-| Mechanism | An orchestration layer **on top of** existing country systems. It reads stock, supplier lead times and delivery capacity through adapters, computes the availability and delivery promise, lets customers confirm a window, tracks delivery, and runs exceptions and claims on one order view | A mobile data-capture app embedded in goods receipt, picking and cycle counts, plus store task execution, to keep store stock records accurate | A case-management desk that gives support, branches and dispatch one order view, ownership and SLA for exceptions and claims; proactive messages |
-| Opportunities addressed | O-01, O-02, O-03, O-04 (indirectly O-05 via data-quality alerts) | O-05, indirectly O-01 | O-04, partly O-03 |
-| Journey stages changed | CON (credible claim), DEC (confirm window), RET (tracking, exceptions), ADV (fewer unresolved complaints) | RET (internal) | RET, ADV |
-| Stakeholder tensions resolved | STK-1↔STK-5: one core, per-country configuration. STK-2/3↔STK-8: promise includes supplier lead time | STK-4↔STK-3: accuracy as by-product of existing tasks. Raises STK-6 tension | STK-3 ↔ support: one owner |
-| Hypothesis | If customers are shown a promise made from reconciled data and are told proactively about exceptions, then promise failures, "where is my order" contacts and cancellations fall, measured by on-time-in-full and promise accuracy | If receiving and picking capture updates stock, records drift less, then promises are more accurate | If exceptions have an owner and one view, then resolution time falls |
-| Analogous successes | Travis Perkins and STARK UK/Jewson launched real-time delivery tracking with named windows (S-030, no quantified result); retail order-promising cases: −40% stock-mismatch cancellations in 3 months (S-031, vendor) | Reflexis-type store task tools: vendor claims only (S-015); stock-accuracy research (S-016) | WISMO reduction ~40% from proactive messages (S-025, vendor) |
-| Analogous failures | Lidl SAP: ~€500m, abandoned after 7 years; lesson: do not customise/replace core ERP around local processes (S-029) | No failure found for store task tools; compliance gaps with employee consultation (S-012) | None found (searches tried: 1) |
-| Feasibility — technical | ⚠️ needs read access to stock/order/delivery data in the pilot market (D-12, D-03); promise rules are standard; ML ETA needs ≥ 6 months of data, so start rules-based (S-032) | ✅ mobile capture is mature | ✅ case management is mature; needs order data feed |
-| Feasibility — economic | ⚠️ cost and value not sized (D-07) | ⚠️ benefit indirect, not sized | ✅ lowest cost; benefit not sized |
-| Feasibility — regulatory | ⚠️ customer data under GDPR; driver GPS needs DPIA (S-014); use aggregate staff metrics | ❌ highest friction: NO WEA ch. 9, SE MBL §11, DK monitoring scrutiny (S-012..S-014) | ✅ |
-| Feasibility — organisational | ⚠️ needs country management, dispatch, carriers (STK-5, STK-9) | ⚠️ staff acceptance, no staff voice (RK-03) | ⚠️ support ownership |
-| Effort / time to deployable first release | M (thin overlay in one market; full scope L) | M | S |
-| Key assumptions | D-10, D-11, D-12 | D-09 | O-04 root cause hypotheses |
+| Mechanism | Reads the order mailbox (email, PDF, Excel), uses an LLM to extract the order and semantic matching to map trade shorthand to SKUs, applies contract price and checks stock/credit by rules, proposes a delivery date, and presents a draft for one-click human approval before writing to the ERP | Moves the long tail of trade customers to a quick-order form / portal / lightweight EDI so orders arrive structured | Builds per-customer extraction templates for the top customers' PDFs/Excel and keys the data by RPA |
+| Opportunities addressed | O-01, O-03, O-04, part of O-02 | O-01 (only for customers who move) | O-01 for the top customers |
+| Journey stages changed | DEC (receive → confirm), RET (exceptions, measures) | CON, DEC | DEC |
+| Stakeholder tensions | Keeps the customer relationship channel; no monitoring of individual handlers (R-26) | Needs customer behaviour change (STK-2); channel conflict with relationship selling | Needs maintenance whenever customers change layouts |
+| Hypothesis | If handlers approve AI-prepared drafts instead of keying, handling time per order and line errors fall, measured by approval-without-edit share, handling time, line error rate, time to confirmation | If customers get a trusted self-service route, a meaningful share of order lines move off email | If templates exist for the top customers, keying disappears for them |
+| Analogous successes | Esker/Siemens Healthineers: automated-order rate 8% → 85%, 93% of fields captured (S-052, vendor, not building materials). Toolbx: GA 1 Sep 2026, building supply, draft orders reviewed before ERP (S-046, no results) | Solar: 65% of order lines digital (S-038); Ahlsell Norway >50% digital trade (S-050): digital works for many customers | none building-specific found |
+| Analogous failures | "Automation illusion": teams still validate nearly every order; SKU mismatches surface after shipment (S-053). Prompt-injection risk for email agents (S-055) | Portal uptake low: Byggmakker ~1.5% of revenue (2016), Maxbo Proff revenue below user numbers (S-047); buyers keep emailing their rep (S-056) | Template OCR breaks when layouts change; teams stop trusting output (S-053) |
+| Feasibility — technical | ⚠️ ERP write-back (API, RPA fallback) unknown (D-23); LLM accuracy unproven (D-25); doable as an overlay in the pilot office | ✅ standard e-commerce; ⚠️ needs trusted price/stock data | ⚠️ brittle, high maintenance |
+| Feasibility — economic | ⚠️ unsized (R-31 illustrative); LLM usage cost to be modelled (D-19) | ⚠️ build cost plus adoption campaigns | ✅ cheap to start, costly to maintain |
+| Feasibility — regulatory | ⚠️ GDPR on message contents; processor terms for the LLM (D-19); AI Act classification to check (Step 11) | ✅ | ✅ |
+| Feasibility — organisational | ⚠️ handler adoption; order-office lead owns exceptions (D-22) | ⚠️ sales staff vs portal | ⚠️ IT maintenance owner |
+| Effort / time to deployable first release | M (fits 12 weeks with a pilot office) | L (adoption takes months) | M |
+| Key assumptions | D-24, D-25, D-12/D-23 | Customers adopt the form | Layouts stay stable |
 
 ## 3. Fit evidence and failure modes
-- **Works elsewhere:** merchants in the UK launched named-window delivery tracking; STARK UK (the parent of Nordic peers) did it for Jewson (S-030). Outcome numbers were not found, so effect size is not evidenced for builders' merchants. Retail order-promising cases show cancellation reductions of 40-52%, but are vendor-reported and not heavy goods (S-031).
-- **Fails when:** a core-system replacement or heavy customisation is attempted (S-029). Failure modes to watch for Concept 1: stock data too poor to promise from (low-confidence promises), integration delays, notification fatigue, dispatch not adopting status events, staff consultation delaying rollout in NO/SE (S-012, S-013).
-- **No failure case for delivery tracking itself** was found (1 search).
+- **Works elsewhere (weak evidence):** vendor cases in other industries (S-052) and a first building-supply launch with no results (S-046). Peers in the Nordics show the long tail exists (S-038, S-039, S-043, S-044).
+- **Fails when:** extraction is treated as the hard part. SKU resolution and incomplete orders are the hard part (S-053); portals alone do not move small customers (S-047, S-056); ERP replacement derails service (S-029).
+- **Failure modes to watch for Concept 1:** exceptions pile up and handlers stop trusting drafts; wrong SKU accepted by a hurried approver; duplicate or partial ERP writes; prompt-injection or malicious attachments in customer mail (S-055); GDPR exposure from sending message contents to an LLM (D-19); customer-specific item names not learned.
+- **Failure case search:** one, plus the portal evidence; no public failure of AI/OCR order entry in building materials was found (S-037 §4.2).
 
 ## 4. Decision matrix
-Weights derived from the judging rubric (R-12) and time to market (R-15), not the default: opportunity coverage 30 (Problem Understanding, Prioritisation), business impact and innovation 25, feasibility 25 (Feasible Solution), time to deployable release 15, risk 5. Scores 1-5, each a judgment.
+Weights derived from the judging rubric (R-12) and the time-to-market constraint (R-15, R-30): opportunity coverage 30 (Problem Understanding, Prioritisation), business impact and innovation 25, feasibility 25, time to deployable first release 15, risk 5. Scores 1-5, each a judgment.
 
-| Criterion | Weight | C1 Hub | C2 Store Stock Truth | C3 Care & Claims Desk |
+| Criterion | Weight | C1 Assistant | C2 Self-service | C3 Templates + RPA |
 |---|---|---|---|---|
-| Opportunity coverage | 30% | 5 — four of five scored O-IDs (O-01 15, O-04 14, O-02 13, O-03 12) | 2 — O-05 (score 8) + indirect | 3 — O-04 (14), part of O-03 |
-| Business impact & innovation | 25% | 5 — customer-visible, measurable (OTIF, WISMO, claims); differentiating vs peers (whitespace 1-3, 02 §5) | 3 — indirect, hard to measure | 3 — useful, less differentiating |
-| Feasibility | 25% | 3 — integration unknowns | 3 — consultation friction | 4 — mature tech |
-| Time to deployable first release | 15% | 3 — pilot slice feasible, full scope larger | 4 | 4 |
-| Risk (inverse) | 5% | 3 — data quality, scope | 2 — labour law, no staff voice | 4 |
-| **Weighted score** | 100% | **4.10** | **2.80** | **3.45** |
+| Opportunity coverage | 30% | 5 — O-01, O-03, O-04 and part of O-02 | 2 — only customers who change | 3 — top customers only |
+| Business impact & innovation | 25% | 4 — measurable handling time, keeps the channel; unproven | 3 — scale if adopted | 2 — incremental |
+| Feasibility | 25% | 3 — ERP write and accuracy unknown | 4 — mature tech | 4 — mature tech, brittle |
+| Time to deployable first release | 15% | 3 — tight for 12 weeks | 3 — slow adoption | 4 |
+| Risk (inverse) | 5% | 3 | 2 | 3 |
+| **Weighted score** | 100% | **3.85** | **2.90** | **3.15** |
 
-Sensitivity: C1 stays first unless feasibility is weighted above ~55% with the other weights scaled proportionally (computed from the table).
+Arithmetic: C1 = 1.50 + 1.00 + 0.75 + 0.45 + 0.15 = 3.85; C2 = 0.60 + 0.75 + 1.00 + 0.45 + 0.10 = 2.90; C3 = 0.90 + 0.50 + 1.00 + 0.60 + 0.15 = 3.15. Sensitivity: C3 overtakes C1 only if feasibility and time are weighted above about 55% combined.
 
 ## 5. Go / Pivot / Stop
-**Decision: Go with Concept 1.** **Confidence: Medium** — the problem evidence is strong but sourced from peers, not Company A (RK-04), and the root-cause chain is a hypothesis (D-09, D-10). Concept 3's exception desk is part of Concept 1's capabilities (O-04); Concept 2's stock feedback becomes a data-quality feed and a later enabler, not a separate programme (R-03: fragmentation is a constraint). No Pivot/Stop, so no blocking D-##.
+**Decision: Go with Concept 1, gated by the baseline.** **Confidence: Medium.** The problem is evidenced to exist but unsized (RK-05), and the technology has no independent building-materials results (RK-06). Mitigations are built into the plan the user set: weeks 1-2 baseline, weeks 3-8 shadow mode, 100% human review, week-12 go/no-go (R-27). No Pivot/Stop, so no blocking `D-##`.
 
-## 6. Chosen concept — Promise & Delivery Hub (working name)
+## 6. Chosen concept — Order Intake Assistant (working name)
 
 ### How it works
-A thin, configurable layer between customers/channels and each country's existing systems. When a customer (or branch staff) builds an order, the Hub returns what can actually be promised: which items can come from which location or supplier, the earliest date and delivery window, and how confident that promise is. The customer confirms a window and, for trade, who receives and how to access the site. On the delivery day the customer gets a named window, live status and proof of delivery. If anything goes wrong — delay, shortage, damage — an exception is raised, a named owner is assigned, the customer hears first and can follow the case to resolution. One core product, with per-country configuration for rules, languages, systems adapters and consultation steps (R-08). It does **not** replace ERP/POS (S-029; RK-01 resolved towards integration) and uses AI only in supporting roles (R-20).
+The assistant sits between Company A's order mailboxes and its ERP. A message arrives; the system classifies it (order, quote request, status request, complaint), extracts customer, site, lines, quantities, units and delivery wishes, maps each line to a SKU using the catalogue and the customer's purchase history, applies the contract price and checks stock and credit by reading the ERP (rules, not AI), proposes a delivery date with a confidence level, and presents a draft next to the original message. The order handler approves or corrects it in one click; lines below the confidence threshold go to an exception queue. On approval the draft order is written to the ERP (API, with RPA as fallback) and a confirmation goes to the customer in their language. Every correction is stored as evaluation data, and a dashboard shows the baseline measures. In weeks 3-8 the same pipeline runs in shadow mode: it prepares drafts for comparison, and nothing is written. The ERP stays; customers keep emailing. One core, with market adapters for Norway and Sweden later (R-24, R-26).
 
 ### Required capabilities (complete list for production)
-User-facing (customers: PER-1 pro, PER-2 DIY)
-1. Availability and delivery promise at ordering, with confidence and fallback to "call branch" when data is unavailable
-2. Delivery window selection and confirmation; reschedule/change receiver/cancel within rules
-3. Site details for trade deliveries (access point, receiver contact, unloading needs)
-4. Order and delivery status page; proactive notifications (SMS/email) at confirmation, day before, live window, delay, delivered
-5. Proof of delivery and delivery exception reporting by the customer (damaged, missing, wrong) with photos
-6. Case tracking and proactive updates for exceptions and claims
-Operational and back-office (staff: support, branch, dispatch)
-7. Promise engine: rules-based availability-to-promise from stock by location, supplier lead times and delivery capacity, with per-country cut-offs and calendars
-8. Country adapters and canonical order/stock/delivery data model; data-quality monitoring (stock mismatches, stale feeds)
-9. Delivery-event capture: driver/carrier status events, proof of delivery, photos, signatures (driver app or integration with the existing TMS/carrier, decision in Step 11)
-10. Exceptions and claims workbench: unified order view, ownership, SLA timers, templates in DA/NO/SV, supplier and carrier recovery tracking
-11. Control-tower dashboard: on-time-in-full, promise accuracy, contacts, exceptions, claims by market/branch (aggregate only)
-12. AI-assisted functions (supporting): delivery-date/ETA prediction once a baseline exists; exception triage; message drafts — always human-overridable
+Order handling (users: order handlers)
+1. Mailbox connector: ingest email, PDF and Excel from configured order mailboxes; de-duplication, threading, attachment handling, non-order filtering
+2. Message classification and routing: order, quote request, status request, complaint, other
+3. Extraction of customer, site, lines, quantities, units, delivery wishes, each with confidence
+4. SKU matching on catalogue and purchase history (top ~2,000 SKUs first), unit normalisation, alternatives
+5. Price and check (read-only): contract/project price, stock and credit from the ERP
+6. Delivery-date proposal with a confidence level (rule-based; ML ETA later)
+7. Review workspace: message and draft side by side; one-click approve; edit lines; reject, forward, reassign; exception queue by confidence
+8. Draft-order write-back to the ERP via API with RPA fallback; idempotency, retry, error queue, status sync
+9. Customer confirmation in the customer's language after approval; templates; reply tracking
+10. Status-request answers from ERP data, sent after approval
+11. Correction capture as evaluation data; offline evaluation harness; model/prompt version metrics
+12. Read-only list of exceptions after the order (missing site data, stock shortfall)
+Operations and measurement
+13. Order-office lead view: queue monitor, assignment, service timers; aggregate only, no per-employee ranking (R-26)
+14. Measurement dashboard: channel mix, handling time per order, share approved without edits, line error rate, time to confirmation; baseline mode for weeks 1-2 (R-27)
+15. Shadow-mode comparison: AI draft vs the human-entered order, no ERP write
+16. Admin configuration: mailboxes, SKU scope, confidence thresholds, templates, languages, feature flags per market, model/prompt versions
+17. Master-data sync (catalogue, units, customer purchase history) and a customer-specific alias dictionary managed by handlers
+18. Pilot-market adapters for ERP and mail; adapters for other markets later
 Platform and legal
-13. Staff identity and access: corporate SSO, roles and permissions per country/branch; customer access via existing accounts or secure order links
-14. Admin: per-country configuration of rules, calendars, languages, templates, feature flags
-15. Consent, privacy notices, retention, customer data export/deletion, audit log, DPIA artefacts
-16. Notification preferences and opt-out
-17. Localisation (DA, NO, SV, EN)
-18. Help/support content, status and maintenance pages, error and degraded-mode behaviour
-19. Integration API and webhooks for webshop, trade app, counter/POS and other channels
-20. Analytics instrumentation for stage metrics
+19. Staff identity and access: SSO, roles (order handler, order-office lead, administrator, analyst), scoped to office/market
+20. Privacy: DPIA artefacts, message retention and deletion, minimisation/redaction before LLM calls, data-subject requests for customer contacts, full audit log of approvals and ERP writes
+21. LLM gateway: provider abstraction, prompt versioning, injection guardrails (instructions separated from data, least privilege, human approval), cost metering, EU region (D-19)
+22. Staff notifications (queue alerts) and preferences
+23. Localisation (Danish UI, English; D-20), help, status/maintenance pages, degraded mode (when AI is down, messages pass through unprocessed to the queue)
+24. Observability: mailbox, ERP and model health, alerts
+25. Accessibility conformance for the review workspace
 
 ### USPs (each traced)
-1. **Promise made from reconciled data** — no peer sampled is credible on promise reliability (02 §5 whitespace 1; O-01).
-2. **Proactive exception handling with an owner** — "no follow-up" is the recurring complaint (whitespace 2; O-04).
-3. **Site-aware delivery for trade** — access, receiver, window (whitespace 3; O-02).
-4. **One core, local configuration** — answers "one solution, different implementations" (R-08; STK-1↔STK-5).
+1. **Keeps the customer's channel and removes the re-keying** — portals see low uptake (S-047, S-056; O-01).
+2. **Human in control with confidence routing and a learning loop** — avoids the "automation illusion" (S-053; O-03).
+3. **Trade-aware SKU resolution from purchase history** — SKU resolution, not OCR, is the hard part (S-053; O-01).
+4. **Overlay on the existing ERP, one core, market adapters** — no replacement (R-26, R-30, S-029).
 
 ### Stated limitations and preconditions
-- It cannot fix late suppliers or physical shrink; it makes them visible in the promise.
-- Promise quality depends on stock data quality; low-confidence promises are shown as such. Store-level accuracy work (O-05) is an enabler outside this concept.
-- Needs read (and for exceptions, write) access to existing systems in each country (D-12, D-03).
-- Not a price, assortment or ERP replacement programme; heavy-goods dispatch rules differ from parcels (S-028 is parcel data).
+- The size of the problem at Company A is unmeasured (RK-05); accuracy is unproven (RK-06); go/no-go follows the baseline.
+- Needs read access (pricing, stock, credit) and draft-order write access to the Danish ERP (D-23).
+- Mailbox only in the MVP; phone/voicemail, photos and EDI changes later.
+- Does not automate project quotes, forecasting or delivery orchestration; does not replace ERP; does not monitor individual employees (R-26).
 
 ### Top-3 assumptions → `_decisions.md`
-D-10 (failures mainly controllable), D-11 (promise reliability outranks price), D-12 (data accessible in pilot timeframe). Additionally D-09 (stock accuracy → promise link).
+D-24 (size), D-25 (accuracy), D-12/D-23 (ERP write access).
 
 ## Deliverables checklist
 - [x] Every concept maps to O-IDs and stages
-- [x] Fit evidence includes a failure case (S-029) and states none found for tracking
+- [x] Fit evidence includes failure cases (S-053, S-047, S-029)
 - [x] Feasibility covers all four dimensions
-- [x] USPs each trace to a gap or O-ID; limitations stated
-- [x] Required-capabilities list covers the whole solution incl. operational/back-office, not a demo slice
+- [x] USPs trace to a gap or O-ID; limitations stated
+- [x] Required-capabilities list covers the whole solution (operational, back-office, legal), not a demo slice
 - [x] No per-option RICE scores
